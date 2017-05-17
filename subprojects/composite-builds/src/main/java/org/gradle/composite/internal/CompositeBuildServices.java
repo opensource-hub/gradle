@@ -36,7 +36,7 @@ public class CompositeBuildServices extends AbstractPluginServiceRegistry {
         registration.addProvider(new CompositeBuildGlobalScopeServices());
     }
 
-    public void registerExecutionServices(ServiceRegistration registration) {
+    public void registerBuildTreeServices(ServiceRegistration registration) {
         registration.addProvider(new CompositeExecutionScopeServices());
     }
 

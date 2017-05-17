@@ -25,7 +25,7 @@ import org.gradle.internal.scan.config.BuildScanConfigProvider
 import org.gradle.internal.scan.config.BuildScanPluginMetadata
 import org.gradle.internal.service.DefaultServiceRegistry
 import org.gradle.internal.service.scopes.BuildSessionScopeServices
-import org.gradle.internal.service.scopes.ExecutionScopeServices
+import org.gradle.internal.service.scopes.BuildTreeScopeServices
 import org.gradle.internal.service.scopes.GlobalScopeServices
 import org.gradle.internal.service.scopes.GradleUserHomeScopeServiceRegistry
 import org.gradle.test.fixtures.file.TestNameTestDirectoryProvider
@@ -40,7 +40,7 @@ class DefaultGradleLauncherFactoryTest extends Specification {
     final def globalServices = new DefaultServiceRegistry(LoggingServiceRegistry.newEmbeddableLogging(), NativeServicesTestFixture.getInstance()).addProvider(new GlobalScopeServices(false))
     final def userHomeServices = globalServices.get(GradleUserHomeScopeServiceRegistry).getServicesFor(tmpDir.createDir("user-home"))
     final def sessionServices = new BuildSessionScopeServices(userHomeServices, startParameter, ClassPath.EMPTY)
-    final def executionServices = new ExecutionScopeServices(sessionServices)
+    final def executionServices = new BuildTreeScopeServices(sessionServices)
     final def listenerManager = globalServices.get(ListenerManager)
     final def progressLoggerFactory = globalServices.get(ProgressLoggerFactory)
     final def userHomeScopeServiceRegistry = globalServices.get(GradleUserHomeScopeServiceRegistry)
